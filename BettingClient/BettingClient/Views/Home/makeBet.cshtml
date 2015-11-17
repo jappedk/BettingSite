@@ -1,0 +1,69 @@
+﻿@model BettingClient.Models.Wrapper
+
+@{
+    ViewBag.Title = "makeBet";
+
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>The Betting Site</title>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="~/Style/StyleSheet.css" />
+</head>
+
+<body>
+    <header>
+        Bruger navn: @Model.bruger.navn
+        konto saldo: @Model.bruger.saldo kr.
+        <a id="loginlink" @Html.ActionLink("Vælg Bruger", "Index")></a>
+    </header>
+    <div id="title">
+        <h2>TheBetting Site</h2>
+    </div>
+
+
+
+    <table id="WagerTable">
+        <tr>
+            <th>match id</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Home odds</th>
+            <th>Draw odds</th>
+            <th>Away odds</th>
+        </tr>
+        @foreach (var w in Model.wager)
+        {
+            if (w.betOpen == true)
+            {
+                <tr>
+                    <td>  @w.id </td>
+                    <td>@w.match.homeTeam</td>
+                    <td>@w.match.awayTeam</td>
+                    <td>@Html.ActionLink(@w.homeOdds.ToString(), "homeWin", new { wid = w.id, id = @Model.bruger.id })</td>
+                    <td>@Html.ActionLink(@w.drawOdds.ToString(), "drawGame", new { wid = w.id, id = @Model.bruger.id })</td>
+                    <td>@Html.ActionLink(@w.awayOdds.ToString(), "awayWin", new { wid = w.id, id = @Model.bruger.id })</td>
+
+                </tr>
+            }
+        }
+
+    </table>
+
+    <aside id="CurrentBet">
+        <header>
+            Dit Spil
+
+        </header>
+    </aside>
+
+</body>
+</html>

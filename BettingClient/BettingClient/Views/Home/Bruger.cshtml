@@ -1,0 +1,77 @@
+﻿@model BettingClient.Bruger
+
+@{
+    ViewBag.Title = "Bruger";
+}
+
+<h2>Bruger</h2>
+Bruger id: @Model.id <br />
+navn: @Model.navn <br />
+konto saldo: @Model.saldo kr.
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Spil historie</h1>
+    <table>
+        <tr>
+            <td headers="Active Bets">
+                <h2>Active Bets</h2>
+                <ul>
+                    @foreach (var b in Model.bets)
+                    {
+
+                        if (@b.wager.betOpen == true)
+                        {
+                            <li>
+                                @b;
+
+                            </li>
+                        }
+                    }
+                </ul>
+            </td>
+            <td headers="Finished Bets">
+                <h2>Finished Bets</h2>
+                <ul>
+                    @foreach (var b in Model.bets)
+                    {
+
+                        if (@b.wager.betOpen == false)
+                        {
+                            <li>
+                                @b;
+
+
+                            </li>
+                        }
+                    }
+                </ul>
+            </td>
+            <td headers="All Bets">
+                <h2>All Bets</h2>
+                <ul>
+                    @foreach (var b in Model.bets)
+            {
+                        <li>
+                            @b;
+
+                        </li>
+                    }
+
+
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <h1>Lav nye bets</h1>
+    @Html.ActionLink("Bets", "makeBet", new { id = Model.id })
+    <br />
+    @Html.ActionLink("Home", "Index")
+</body>
+</html>
