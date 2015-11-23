@@ -26,8 +26,8 @@ namespace TheBettingSite.Controllers
         [HttpPost]
         public ActionResult Index(Bruger bruger, int wid, int bet)
         {
-            
 
+            
                 if (bruger != null)
                 {
                     ViewBag.list = Service.getWagers();
@@ -52,7 +52,6 @@ namespace TheBettingSite.Controllers
         public ActionResult userProfile(Bruger bruger)
         {
                 return View(bruger);
-            
         }
     }
 }

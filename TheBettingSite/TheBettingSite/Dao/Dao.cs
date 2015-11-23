@@ -30,5 +30,10 @@ namespace TheBettingSite.Dao
         {
             return DB.wagers.Find(id);
         }
+
+        public static Bruger findUserOnid(int id)
+        {
+            return DB.Brugers.Find(id);
+        }
     }
 }

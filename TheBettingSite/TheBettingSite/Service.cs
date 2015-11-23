@@ -52,5 +52,9 @@ namespace TheBettingSite
         {
             return Dao.Dao.findWager(id);
         }
+        public static Bruger findBruger(int id)
+        {
+            return Dao.Dao.findUserOnid(id);
+        }
     }
 }
