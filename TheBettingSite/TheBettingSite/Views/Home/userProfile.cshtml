@@ -1,0 +1,23 @@
+﻿@model TheBettingSite.Bruger
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>userProfile</title>
+</head>
+<body>
+    <div> 
+        
+        User id: @Model.id <br />
+        User name: @Model.navn<br />
+        Saldo: @Model.saldo<br />
+        @Html.ActionLink("Home", "index", Model)
+    </div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BettingSiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="amount" Type="float" />
+          <Property Name="theBet" Type="int" />
+          <Property Name="brugerid" Type="int" />
+          <Property Name="wagerid" Type="int" />
+        </EntityType>
+        <EntityType Name="Bruger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="navn" Type="varchar" MaxLength="15" />
+          <Property Name="password" Type="varchar(max)" />
+          <Property Name="saldo" Type="float" />
+        </EntityType>
+        <EntityType Name="match">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="homeTeam" Type="varchar" MaxLength="25" />
+          <Property Name="awayTeam" Type="varchar" MaxLength="25" />
+          <Property Name="result" Type="int" />
+        </EntityType>
+        <EntityType Name="wager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="awayOdds" Type="float" Nullable="false" />
+          <Property Name="homeOdds" Type="float" Nullable="false" />
+          <Property Name="drawOdds" Type="float" Nullable="false" />
+          <Property Name="betOpen" Type="bit" />
+          <Property Name="matchid" Type="int" />
+        </EntityType>
+        <Association Name="FK__bet__brugerid__49C3F6B7">
+          <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
+          <End Role="bet" Type="Self.bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bruger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bet">
+              <PropertyRef Name="brugerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bet__wagerid__4AB81AF0">
+          <End Role="wager" Type="Self.wager" Multiplicity="0..1" />
+          <End Role="bet" Type="Self.bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="wager">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bet">
+              <PropertyRef Name="wagerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__wager__matchid__46E78A0C">
+          <End Role="match" Type="Self.match" Multiplicity="0..1" />
+          <End Role="wager" Type="Self.wager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="match">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wager">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BettingSiteModelStoreContainer">
+          <EntitySet Name="bet" EntityType="Self.bet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bruger" EntityType="Self.Bruger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="match" EntityType="Self.match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wager" EntityType="Self.wager" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__bet__brugerid__49C3F6B7" Association="Self.FK__bet__brugerid__49C3F6B7">
+            <End Role="Bruger" EntitySet="Bruger" />
+            <End Role="bet" EntitySet="bet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bet__wagerid__4AB81AF0" Association="Self.FK__bet__wagerid__4AB81AF0">
+            <End Role="wager" EntitySet="wager" />
+            <End Role="bet" EntitySet="bet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__wager__matchid__46E78A0C" Association="Self.FK__wager__matchid__46E78A0C">
+            <End Role="match" EntitySet="match" />
+            <End Role="wager" EntitySet="wager" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BettingSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="theBet" Type="Int32" />
+          <Property Name="brugerid" Type="Int32" />
+          <Property Name="wagerid" Type="Int32" />
+          <NavigationProperty Name="Bruger" Relationship="Self.FK__bet__brugerid__173876EA" FromRole="bet" ToRole="Bruger" />
+          <NavigationProperty Name="wager" Relationship="Self.FK__bet__wagerid__182C9B23" FromRole="bet" ToRole="wager" />
+        </EntityType>
+        <EntityType Name="Bruger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="navn" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="saldo" Type="Double" />
+          <NavigationProperty Name="bets" Relationship="Self.FK__bet__brugerid__173876EA" FromRole="Bruger" ToRole="bet" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="match">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="homeTeam" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="awayTeam" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="Int32" />
+          <NavigationProperty Name="wagers" Relationship="Self.FK__wager__matchid__145C0A3F" FromRole="match" ToRole="wager" />
+        </EntityType>
+        <EntityType Name="wager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="awayOdds" Type="Double" Nullable="false" />
+          <Property Name="homeOdds" Type="Double" Nullable="false" />
+          <Property Name="drawOdds" Type="Double" Nullable="false" />
+          <Property Name="betOpen" Type="Boolean" />
+          <Property Name="matchid" Type="Int32" />
+          <NavigationProperty Name="bets" Relationship="Self.FK__bet__wagerid__182C9B23" FromRole="wager" ToRole="bet" />
+          <NavigationProperty Name="match" Relationship="Self.FK__wager__matchid__145C0A3F" FromRole="wager" ToRole="match" />
+        </EntityType>
+        <Association Name="FK__bet__brugerid__173876EA">
+          <End Role="Bruger" Type="Self.Bruger" Multiplicity="0..1" />
+          <End Role="bet" Type="Self.bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bruger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bet">
+              <PropertyRef Name="brugerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bet__wagerid__182C9B23">
+          <End Role="wager" Type="Self.wager" Multiplicity="0..1" />
+          <End Role="bet" Type="Self.bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="wager">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bet">
+              <PropertyRef Name="wagerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__wager__matchid__145C0A3F">
+          <End Role="match" Type="Self.match" Multiplicity="0..1" />
+          <End Role="wager" Type="Self.wager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="match">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wager">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BettingSiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bets" EntityType="Self.bet" />
+          <EntitySet Name="Brugers" EntityType="Self.Bruger" />
+          <EntitySet Name="matches" EntityType="Self.match" />
+          <EntitySet Name="wagers" EntityType="Self.wager" />
+          <AssociationSet Name="FK__bet__brugerid__173876EA" Association="Self.FK__bet__brugerid__173876EA">
+            <End Role="Bruger" EntitySet="Brugers" />
+            <End Role="bet" EntitySet="bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bet__wagerid__182C9B23" Association="Self.FK__bet__wagerid__182C9B23">
+            <End Role="wager" EntitySet="wagers" />
+            <End Role="bet" EntitySet="bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__wager__matchid__145C0A3F" Association="Self.FK__wager__matchid__145C0A3F">
+            <End Role="match" EntitySet="matches" />
+            <End Role="wager" EntitySet="wagers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BettingSiteModelStoreContainer" CdmEntityContainer="BettingSiteEntities">
+          <EntitySetMapping Name="bets">
+            <EntityTypeMapping TypeName="BettingSiteModel.bet">
+              <MappingFragment StoreEntitySet="bet">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="theBet" ColumnName="theBet" />
+                <ScalarProperty Name="brugerid" ColumnName="brugerid" />
+                <ScalarProperty Name="wagerid" ColumnName="wagerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brugers">
+            <EntityTypeMapping TypeName="BettingSiteModel.Bruger">
+              <MappingFragment StoreEntitySet="Bruger">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="navn" ColumnName="navn" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="matches">
+            <EntityTypeMapping TypeName="BettingSiteModel.match">
+              <MappingFragment StoreEntitySet="match">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="homeTeam" ColumnName="homeTeam" />
+                <ScalarProperty Name="awayTeam" ColumnName="awayTeam" />
+                <ScalarProperty Name="result" ColumnName="result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wagers">
+            <EntityTypeMapping TypeName="BettingSiteModel.wager">
+              <MappingFragment StoreEntitySet="wager">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="awayOdds" ColumnName="awayOdds" />
+                <ScalarProperty Name="homeOdds" ColumnName="homeOdds" />
+                <ScalarProperty Name="drawOdds" ColumnName="drawOdds" />
+                <ScalarProperty Name="betOpen" ColumnName="betOpen" />
+                <ScalarProperty Name="matchid" ColumnName="matchid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

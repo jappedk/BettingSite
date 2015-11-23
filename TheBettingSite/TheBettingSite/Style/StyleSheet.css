@@ -1,0 +1,54 @@
+﻿body {
+}
+header{
+    border-color:black;
+    border-style:solid;
+    border-width:thick;
+    padding: 10px, 20px;
+}
+#Userprofile{
+    float:right;
+}
+#title{
+    width:auto;
+    border-color:black;
+    border-style:solid;
+    border-width:thick;
+    text-align:center;
+}
+#WagerTable{
+    border-collapse:collapse;
+    border:solid;
+    width:70%;
+    float:left;
+}
+#WagerTable td, #WagerTable th{
+    font-size:1em;
+    border: 1px solid;
+    padding: 3px 7px 2px 7px;
+}
+#WagerTable th{
+    font-size:1.1em;
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:5px;
+    border:solid;
+    border-color:black;
+    color:black;
+}
+#WagerTable td, #WagerTable th{
+    font-size:1em;
+    border: 1px solid;
+    padding: 3px 7px 2px 7px;
+}
+#WagerTable tr:nth-child(even){
+    background-color:lightslategray;
+}
+aside{
+    border-color:black;
+    border-style:solid;
+    border-width:thick;
+    position:fixed; top:15%; right:3%;
+    float:right;
+    width:25%;
+}
